@@ -24,4 +24,17 @@ module.exports = {
         clientID:
             process.env.AUTH0_CLIENT_ID || 'fvGojA5YGbpweMr5qw5Va80leEXK1dad',
     },
+    postgresql: {
+        maxPool: 8,
+        minPool: 0,
+        user: process.env.PG_USER || 'postgres',
+        password: process.env.PG_PASSWORD || 'postgresql',
+        host: process.env.PG_HOST || 'localhost',
+        port: process.env.PG_PORT ? process.env.PG_PORT : '5432',
+        database: (() => {
+            if (process.env.CUSTOM_DB) return process.env.CUSTOM_DB;
+            if (process.env.NODE_ENV === 'test') return 'rappi_test';
+            return 'rappi';
+        })(),
+    },
 };

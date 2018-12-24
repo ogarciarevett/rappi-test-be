@@ -8,7 +8,16 @@
     "private": true,
     "scripts": {
         "dev": "NODE_ENV=development nodemon server",
-        "start": "NODE_ENV=production node server"
+        "start": "NODE_ENV=production node server",
+        "test": "NODE_ENV=test npm run test:unit && npm run test:integration",
+        "test:unit": "NODE_ENV=test mocha tests/bootstrap.js tests/unit/* --recursive -t 30000 --exit",
+        "test:integration": "NODE_ENV=test mocha tests/bootstrap.js tests/integration/* --recursive -t 30000 --exit",
+        "docker:up": "./docker/docker-up.sh",
+        "docker:test": "npm run docker:up rappi_be_test",
+        "migrate:create": "NODE_CONFIG_DIR=../config npx knex migrate:make $TABLE_NAME --knexfile ./migrations/knexfile.js",
+        "migrate:latest": "NODE_CONFIG_DIR=../config npx knex migrate:latest --knexfile ./migrations/knexfile.js && node ./migrations/utilities/updateRedis.js",
+        "migrate:latest:test": "NODE_ENV=test NODE_CONFIG_DIR=../config npx knex migrate:latest --knexfile ./migrations/knexfile.js",
+        "migrate:rollback": "NODE_CONFIG_DIR=../config npx knex migrate:rollback --knexfile ./migrations/knexfile.js"
     },
     "dependencies": {
         "axios": "^0.18.0",
@@ -24,6 +33,7 @@
         "http-status-codes": "^1.3.0",
         "joi": "^14.3.0",
         "jwks-rsa": "^1.3.0",
+        "knex": "^0.16.3",
         "morgan": "^1.9.1",
         "rootpath": "^0.1.2",
         "swagger-jsdoc": "^3.2.6",
@@ -38,6 +48,7 @@
         "eslint-config-promise": "^1.2.6",
         "mocha": "^5.2.0",
         "nodemon": "^1.18.9",
+        "sinon": "^7.2.2",
         "supertest": "^3.3.0"
     }
 }

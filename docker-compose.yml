@@ -1,0 +1,66 @@
+version: '3'
+services:
+    postgres_rappi:
+        container_name: postgres_rappi
+        image: mdillon/postgis
+        environment:
+            POSTGRES_PASSWORD: test1234
+            POSTGRES_USER: postgres
+            POSTGRES_DB: rappi
+        ports:
+            - '5433:5432'
+        expose:
+            - '5433'
+    postgres_rappi_test:
+        container_name: postgres_rappi_test
+        image: mdillon/postgis
+        environment:
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_USER: postgres
+            POSTGRES_DB: rappi_test
+        ports:
+            - '5434:5432'
+        expose:
+            - '5434'
+    rappi_be:
+        ports:
+            - '7000:7000'
+        expose:
+            - '7000'
+        container_name: rappi_be
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        depends_on:
+            - postgres_rappi
+        links:
+            - postgres_rappi
+        environment:
+            PORT: '7000'
+            PG_USER: 'postgres'
+            PG_PASSWORD: 'test1234'
+            PG_HOST: postgres_rappi
+            PG_PORT: '5432'
+            CUSTOM_DB: 'rappi'
+        command: sh -c './docker/wait_for_it.sh postgres:5432 &&  npm run migrate:latest && npm start'
+    rappi_be_test:
+        ports:
+            - '7001:7001'
+        expose:
+            - '7001'
+        container_name: rappi_be_test
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        depends_on:
+            - postgres_rappi_test
+        links:
+            - postgres_rappi_test
+        environment:
+            PORT: '7001'
+            PG_USER: 'postgres'
+            PG_PASSWORD: 'postgres'
+            PG_HOST: 'postgres_rappi_test'
+            PG_PORT: '5432'
+            CUSTOM_DB: 'rappi_test'
+        command: sh -c './docker/wait_for_it.sh postgres_test:5432 && npm run test'
