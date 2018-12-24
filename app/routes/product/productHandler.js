@@ -1,7 +1,8 @@
 require('rootpath')();
 const debug = require('debug')('rappi:productHandler');
 const HTTP_STATUSES = require('http-status-codes');
-const ProductValidator = require('../../validators/productValidator');
+const ProductValidator = require('app/validators/productValidator');
+const ProductController = require('app/controllers/productController');
 
 class ProductHandler {
     static async find(req, res, next) {
