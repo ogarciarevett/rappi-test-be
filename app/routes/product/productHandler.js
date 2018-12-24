@@ -1,5 +1,5 @@
 require('rootpath')();
-const debug = require('debug')('rappi:productHandler');
+const logger = require('app/utils/logger');
 const HTTP_STATUSES = require('http-status-codes');
 const ProductValidator = require('app/validators/productValidator');
 const ProductController = require('app/controllers/productController');
@@ -12,7 +12,7 @@ class ProductHandler {
             const items = await ProductController.getAll(query.search);
             res.status(HTTP_STATUSES.OK).json(items);
         } catch (error) {
-            debug(error);
+            logger.error(error);
             next(error);
         }
     }
@@ -24,7 +24,7 @@ class ProductHandler {
             const item = await ProductController.getID(params.id);
             res.status(HTTP_STATUSES.OK).json(item);
         } catch (error) {
-            debug(error);
+            logger.error(error);
             next(error);
         }
     }

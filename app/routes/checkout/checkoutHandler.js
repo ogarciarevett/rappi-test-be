@@ -1,5 +1,5 @@
 require('rootpath')();
-const debug = require('debug')('rappi:checkoutHandler');
+const logger = require('app/utils/logger');
 const HTTP_STATUSES = require('http-status-codes');
 const CheckoutController = require('app/controllers/checkoutController');
 const { BadRequestError } = require('app/utils/errors');
@@ -13,7 +13,7 @@ class CheckoutHandler {
             const result = await CheckoutController.pay(payment);
             res.status(HTTP_STATUSES.OK).json(result);
         } catch (error) {
-            debug(error);
+            logger.error(error);
             next(error);
         }
     }
@@ -30,7 +30,7 @@ class CheckoutHandler {
 
             res.status(HTTP_STATUSES.OK).json(result);
         } catch (error) {
-            debug(error);
+            logger.error(error);
             next(error);
         }
     }
@@ -39,7 +39,7 @@ class CheckoutHandler {
         try {
             res.status(HTTP_STATUSES.OK).json(result);
         } catch (error) {
-            debug(error);
+            logger.error(error);
             next(error);
         }
     }

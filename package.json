@@ -1,41 +1,43 @@
 {
-  "name": "rappi-test-be",
-  "version": "0.0.1",
-  "description": "Minimal Express API",
-  "main": "server.js",
-  "author": "Omar Garcia",
-  "license": "MIT",
-  "private": true,
-  "scripts": {
-    "dev": "NODE_ENV=development DEBUG=rappi:* nodemon server",
-    "start": "NODE_ENV=production DEBUG=rappi:* node server"
-  },
-  "dependencies": {
-    "axios": "^0.18.0",
-    "body-parser": "^1.18.3",
-    "chalk": "^2.4.1",
-    "config": "^3.0.1",
-    "cors": "^2.8.5",
-    "eslint": "^5.9.0",
-    "express": "^4.16.4",
-    "express-basic-auth": "^1.1.6",
-    "express-jwt": "^5.3.1",
-    "helmet": "^3.15.0",
-    "http-status-codes": "^1.3.0",
-    "joi": "^14.3.0",
-    "jwks-rsa": "^1.3.0",
-    "rootpath": "^0.1.2",
-    "swagger-jsdoc": "^3.2.6",
-    "swagger-ui-express": "^4.0.2"
-  },
-  "devDependencies": {
-    "chai": "^4.2.0",
-    "debug": "^4.1.1",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-import": "^0.13.0",
-    "eslint-config-promise": "^1.2.6",
-    "mocha": "^5.2.0",
-    "nodemon": "^1.18.9",
-    "supertest": "^3.3.0"
-  }
+    "name": "rappi-test-be",
+    "version": "0.0.1",
+    "description": "Minimal Express API",
+    "main": "server.js",
+    "author": "Omar Garcia",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "dev": "NODE_ENV=development nodemon server",
+        "start": "NODE_ENV=production node server"
+    },
+    "dependencies": {
+        "axios": "^0.18.0",
+        "body-parser": "^1.18.3",
+        "chalk": "^2.4.1",
+        "config": "^3.0.1",
+        "cors": "^2.8.5",
+        "eslint": "^5.9.0",
+        "express": "^4.16.4",
+        "express-basic-auth": "^1.1.6",
+        "express-jwt": "^5.3.1",
+        "helmet": "^3.15.0",
+        "http-status-codes": "^1.3.0",
+        "joi": "^14.3.0",
+        "jwks-rsa": "^1.3.0",
+        "morgan": "^1.9.1",
+        "rootpath": "^0.1.2",
+        "swagger-jsdoc": "^3.2.6",
+        "swagger-ui-express": "^4.0.2",
+        "winston": "^3.1.0"
+    },
+    "devDependencies": {
+        "chai": "^4.2.0",
+        "debug": "^4.1.1",
+        "eslint-config-airbnb-base": "^13.1.0",
+        "eslint-config-import": "^0.13.0",
+        "eslint-config-promise": "^1.2.6",
+        "mocha": "^5.2.0",
+        "nodemon": "^1.18.9",
+        "supertest": "^3.3.0"
+    }
 }
