@@ -60,6 +60,4 @@ class dbClient {
         });
     }
 }
-
-const client = new dbClient();
-module.exports = client;
+module.exports = dbClient;
